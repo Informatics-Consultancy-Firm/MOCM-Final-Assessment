@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -1680,20 +1680,56 @@ function renderGrades() {
   }).join('');
 }
 
+/**
+ * SYNC ALL sends everything the phone is still holding. Anything not yet
+ * accepted by the server goes first. If there is nothing pending it offers
+ * to send the whole set again, which is safe: the server keys on Attempt ID
+ * and replaces that attempt's rows rather than adding a second copy.
+ */
 function syncAllPending() {
-  if (!GAS_URL) { alert('No server address is set yet. Results are held on this device. Use EXPORT CSV, or paste the endpoint into GAS_URL.'); return; }
-  var pending = read(STORE).filter(function(g){ return !g.synced; });
-  if (!pending.length) { alert('All results are already synced.'); return; }
+  if (!GAS_URL) {
+    alert('No server address is set yet. Results are held on this device. Use EXPORT CSV, or paste the endpoint into GAS_URL.');
+    return;
+  }
+
+  var all     = read(STORE);
+  if (!all.length) { alert('There are no results on this device.'); return; }
+
+  var pending = all.filter(function(g){ return !g.synced; });
+  var list    = pending;
+
+  if (!pending.length) {
+    if (!confirm('All ' + all.length + ' results on this phone are already marked as sent.\n\n' +
+                 'Send them all again? Nothing will be duplicated, the server replaces each ' +
+                 'attempt by its own reference.')) return;
+    list = all;
+  }
+
+  var btnLabel = 'Sending ' + list.length + (list.length === 1 ? ' result' : ' results') + '.';
+  var strip = document.getElementById('queueStrip');
+  strip.textContent = btnLabel + ' Please keep this page open.';
+  strip.classList.add('show');
 
   var done = 0, failed = 0;
   var run = function(i) {
-    if (i >= pending.length) {
+    if (i >= list.length) {
+      var stillOut = read(OUTBOX).length;
+      if (!stillOut) strip.classList.remove('show');
+      else paintQueue();
       renderGrades();
-      alert('Synced ' + done + ' of ' + pending.length + ' results.' + (failed ? ' ' + failed + ' could not be sent.' : ''));
+      alert('Sent ' + done + ' of ' + list.length + ' results.' +
+            (failed ? '\n\n' + failed + ' could not be sent. They are still on this phone, ' +
+                      'so try SYNC ALL again when the connection is better.' : ''));
       return;
     }
-    postGrade(pending[i]).then(function(res){
-      if (res && res.ok) { markSynced(pending[i].attemptId); done++; } else { failed++; }
+    strip.textContent = 'Sending ' + (i + 1) + ' of ' + list.length + '. Please keep this page open.';
+    postGrade(list[i]).then(function(res){
+      if (res && res.ok) {
+        markSynced(list[i].attemptId);
+        var rest = read(OUTBOX).filter(function(g){ return g.attemptId !== list[i].attemptId; });
+        save(OUTBOX, rest);
+        done++;
+      } else { failed++; }
       run(i + 1);
     }).catch(function(){ failed++; run(i + 1); });
   };
