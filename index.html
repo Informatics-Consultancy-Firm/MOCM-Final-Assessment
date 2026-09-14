@@ -1,0 +1,1742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+<meta id="mocm-theme" name="mocm-theme" content="self">
+<title>PHU Malaria Onsite Coaching and Mentorship Programme, Case Scenarios Assessment</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#004080;--navy2:#002952;--navy3:#0056b3;
+  --gold:#ffc107;--gold2:#e6a800;
+  --green:#1a7a3c;--green-l:#e8f5ee;--green-b:#b2dfcc;
+  --red:#c0392b;--red-l:#fff0ee;
+  --gray:#f0f4f8;--border:#dde3ee;
+}
+body{font-family:'Oswald',sans-serif;background:var(--gray);min-height:100vh;color:#1a2533}
+.hdr{background:linear-gradient(135deg,var(--navy2),var(--navy));padding:12px 18px;display:flex;align-items:center;gap:13px;border-bottom:3px solid var(--gold);box-shadow:0 4px 16px rgba(0,20,60,.3)}
+.hdr-logo{width:42px;height:42px;background:#fff;border-radius:9px;border:2px solid var(--gold);flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.hdr-logo svg{width:23px;height:23px;color:var(--navy)}
+.hdr-txt h1{font-size:1rem;font-weight:700;color:#fff;letter-spacing:.4px;line-height:1.2}
+.hdr-txt p{font-size:.6rem;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.6px;margin-top:2px}
+.hdr-timer{margin-left:auto;background:rgba(255,255,255,.1);border:2px solid var(--gold);border-radius:10px;padding:6px 13px;font-size:1.25rem;font-weight:700;color:#fff;letter-spacing:1px;display:none;font-variant-numeric:tabular-nums}
+.hdr-timer.urgent{background:rgba(220,53,69,.3);border-color:#dc3545;animation:pulse .8s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+.screen{display:none;min-height:calc(100vh - 70px)}
+.screen.active{display:block}
+.tab-bar{background:#fff;border-bottom:2px solid var(--border);display:flex;position:sticky;top:0;z-index:100}
+.tab-btn{flex:1;padding:13px;font-family:'Oswald',sans-serif;font-size:.85rem;font-weight:600;letter-spacing:.5px;border:none;background:none;color:#607080;cursor:pointer;border-bottom:3px solid transparent;transition:all .2s}
+.tab-btn.active{color:var(--navy);border-bottom-color:var(--navy)}
+.queue-strip{display:none;background:#fff8e1;border-bottom:2px solid #ffe082;color:#6b5200;font-size:.76rem;padding:8px 16px;text-align:center;letter-spacing:.3px}
+.queue-strip.show{display:block}
+.welcome-wrap{max-width:540px;margin:0 auto;padding:26px 16px}
+.welcome-card{background:#fff;border-radius:16px;padding:26px 22px;box-shadow:0 6px 24px rgba(0,64,128,.1);border-top:5px solid var(--gold)}
+.welcome-icon{width:60px;height:60px;background:linear-gradient(135deg,var(--navy),var(--navy3));border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+.welcome-icon svg{width:28px;height:28px;color:var(--gold)}
+.welcome-title{font-size:1.2rem;font-weight:700;color:var(--navy);text-align:center;letter-spacing:.4px;margin-bottom:5px;line-height:1.3}
+.welcome-sub{font-size:.78rem;color:#607080;text-align:center;margin-bottom:18px;line-height:1.5}
+.info-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
+.info-box{background:var(--gray);border-radius:10px;padding:10px 6px;text-align:center;border:2px solid var(--border)}
+.info-val{font-size:1.2rem;font-weight:700;color:var(--navy)}
+.info-lbl{font-size:.55rem;text-transform:uppercase;color:#607080;letter-spacing:.4px;margin-top:1px}
+.mod-list{background:var(--gray);border:2px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:16px}
+.mod-list-t{font-size:.66rem;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.7px;margin-bottom:7px}
+.mod-line{font-size:.74rem;color:#4a5a6a;line-height:1.65}
+.mod-line b{color:var(--navy);font-weight:600}
+.field{margin-bottom:13px}
+.label{font-size:.7rem;font-weight:600;color:var(--navy);text-transform:uppercase;letter-spacing:.8px;display:block;margin-bottom:5px}
+.input{width:100%;border:2px solid var(--border);border-radius:9px;padding:11px 13px;font-family:'Oswald',sans-serif;font-size:.95rem;outline:none;transition:border .2s;background:#fff}
+.input:focus{border-color:var(--navy)}
+.btn{width:100%;padding:13px;background:var(--navy);color:#fff;border:none;border-radius:10px;font-family:'Oswald',sans-serif;font-size:1rem;font-weight:700;letter-spacing:.6px;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn:hover{background:var(--navy2)}
+.btn:disabled{background:#bbb;cursor:not-allowed}
+.btn-gold{background:var(--gold);color:var(--navy)}
+.btn-gold:hover{background:var(--gold2)}
+.icn{width:17px;height:17px;flex-shrink:0}
+.err-msg{color:var(--red);font-size:.78rem;text-align:center;margin-top:8px;display:none}
+.quiz-wrap{max-width:660px;margin:0 auto;padding:18px 16px 30px}
+.q-progress-bar{height:6px;background:#e0e7ee;border-radius:3px;margin-bottom:6px}
+.q-progress-fill{height:6px;background:linear-gradient(90deg,var(--navy),var(--navy3));border-radius:3px;transition:width .3s}
+.q-meta{display:flex;justify-content:space-between;font-size:.72rem;color:#607080;margin-bottom:12px}
+.mod-band{background:linear-gradient(135deg,var(--navy2),var(--navy));border-radius:12px 12px 0 0;padding:11px 18px;color:#fff}
+.mod-band-e{font-size:.58rem;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold);font-weight:600}
+.mod-band-t{font-size:.9rem;font-weight:600;letter-spacing:.4px;margin-top:2px}
+.scen-card{background:#fff;border-left:5px solid var(--gold);border-radius:0 0 12px 12px;padding:14px 18px 16px;box-shadow:0 4px 16px rgba(0,64,128,.08);margin-bottom:14px}
+.scen-lbl{font-size:.6rem;font-weight:700;color:#8a6500;text-transform:uppercase;letter-spacing:.9px;margin-bottom:6px}
+.scen-txt{font-size:.85rem;color:#3a4a5a;line-height:1.65;font-weight:300}
+.q-card{background:#fff;border-radius:14px;padding:20px 18px;box-shadow:0 4px 16px rgba(0,64,128,.1);margin-bottom:14px}
+.q-type{display:inline-block;padding:3px 11px;border-radius:20px;font-size:.58rem;font-weight:700;letter-spacing:.7px;text-transform:uppercase;margin-bottom:10px}
+.q-type.multi{background:#fff8e1;color:#8a6500;border:1px solid #ffe082}
+.q-type.best{background:#e8f1fb;color:var(--navy);border:1px solid #c3d9f0}
+.q-type.single{background:var(--green-l);color:var(--green);border:1px solid var(--green-b)}
+.q-num{font-size:.68rem;font-weight:700;color:var(--navy3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:7px}
+.q-text{font-size:.98rem;font-weight:600;color:#1a2533;line-height:1.6;margin-bottom:16px}
+.opts{display:flex;flex-direction:column;gap:9px}
+.opt{display:flex;align-items:flex-start;gap:12px;border:2px solid var(--border);border-radius:10px;padding:12px 14px;cursor:pointer;transition:all .2s;background:#fff}
+.opt:hover{border-color:var(--navy);background:#f0f5ff}
+.opt.selected{border-color:var(--navy);background:#e8f1fb}
+.opt-circle{width:26px;height:26px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.74rem;font-weight:700;flex-shrink:0;transition:all .2s;margin-top:1px}
+.opt-box{border-radius:7px}
+.opt.selected .opt-circle{border-color:var(--navy);background:var(--navy);color:#fff}
+.opt-text{font-size:.9rem;line-height:1.5}
+.q-nav{display:flex;gap:10px;margin-top:4px}
+.q-nav-btn{flex:1;padding:11px;border:2px solid var(--navy);border-radius:9px;font-family:'Oswald',sans-serif;font-size:.88rem;font-weight:700;cursor:pointer;transition:all .2s;background:#fff;color:var(--navy)}
+.q-nav-btn:hover{background:var(--navy);color:#fff}
+.q-nav-btn.primary{background:var(--navy);color:#fff}
+.q-nav-btn.primary:hover{background:var(--navy2)}
+.q-nav-btn.finish{background:linear-gradient(135deg,var(--green),#28a745);color:#fff;border-color:var(--green)}
+.result-wrap{max-width:560px;margin:0 auto;padding:24px 16px}
+.result-banner{border-radius:16px;padding:28px 22px;text-align:center;margin-bottom:18px}
+.result-banner.pass{background:linear-gradient(135deg,#1a8a3a,#28a745)}
+.result-banner.fail{background:linear-gradient(135deg,#c0392b,#e74c3c)}
+.result-banner.timeout{background:linear-gradient(135deg,#7b4f00,#c8991a)}
+.result-stamp svg{width:46px;height:46px;color:#fff;margin-bottom:8px}
+.result-score{font-size:2.7rem;font-weight:700;color:#fff;letter-spacing:1px}
+.result-name{font-size:1rem;color:rgba(255,255,255,.85);margin-top:4px}
+.result-verdict{font-size:1rem;font-weight:700;color:#fff;margin-top:8px;letter-spacing:.4px;line-height:1.45}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
+.stat-box{background:#fff;border-radius:10px;padding:14px;text-align:center;box-shadow:0 2px 8px rgba(0,64,128,.08)}
+.stat-val{font-size:1.6rem;font-weight:700;color:var(--navy)}
+.stat-lbl{font-size:.64rem;text-transform:uppercase;color:#607080;letter-spacing:.4px;margin-top:2px}
+.closing{margin-top:14px;background:#fff;border-radius:10px;padding:16px;text-align:center;font-size:.83rem;color:#4a5a6a;line-height:1.6;box-shadow:0 2px 8px rgba(0,64,128,.08)}
+.send-pill{display:inline-block;margin-top:10px;padding:4px 12px;border-radius:20px;font-size:.72rem;font-weight:700;letter-spacing:.4px}
+.send-pill.ok{background:var(--green-l);color:var(--green);border:1px solid var(--green-b)}
+.send-pill.pend{background:#fff8e1;color:#8a6500;border:1px solid #ffe082}
+.grades-wrap{max-width:1000px;margin:0 auto;padding:22px 16px}
+.admin-login{max-width:360px;margin:0 auto}
+.grades-kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+.kpi-box{background:#fff;border-radius:10px;padding:14px;text-align:center;box-shadow:0 2px 8px rgba(0,64,128,.08)}
+.kpi-val{font-size:1.5rem;font-weight:700}
+.kpi-lbl{font-size:.64rem;text-transform:uppercase;color:#607080;letter-spacing:.4px;margin-top:2px}
+.grade-table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 10px rgba(0,64,128,.08)}
+.grade-table th{background:linear-gradient(135deg,var(--navy2),var(--navy));color:#fff;padding:10px 12px;text-align:left;font-size:.71rem;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
+.grade-table td{padding:10px 12px;font-size:.84rem;border-bottom:1px solid var(--border)}
+.grade-table tr:last-child td{border-bottom:none}
+.grade-table tr:hover td{background:#f5f8ff}
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:.7rem;font-weight:700;letter-spacing:.3px}
+.badge.pass{background:var(--green-l);color:var(--green);border:1px solid var(--green-b)}
+.badge.fail{background:var(--red-l);color:var(--red);border:1px solid #f0b8b2}
+.badge.timeout{background:#fff8e1;color:#8a6500;border:1px solid #ffe082}
+.sync-pill{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.65rem;font-weight:700}
+.sync-pill.ok{background:#e8f5ee;color:var(--green)}
+.sync-pill.pend{background:#fff8e1;color:#8a6500}
+.cert-overlay{display:none;position:fixed;inset:0;background:rgba(0,20,50,.72);z-index:9000;overflow-y:auto;padding:20px 12px}
+.cert-overlay.show{display:block}
+.cert-scroll{max-width:780px;margin:0 auto}
+#certificate{background:#fff;border:4px solid var(--gold);border-radius:6px;position:relative;box-shadow:0 10px 40px rgba(0,0,0,.4)}
+.cert-inner{border:2px solid var(--navy);margin:9px;padding:30px 34px 24px;text-align:center}
+.cert-seal{width:62px;height:62px;margin:0 auto 10px;background:linear-gradient(135deg,var(--navy),var(--navy3));border:3px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.cert-seal svg{width:28px;height:28px;color:var(--gold)}
+.cert-org{font-size:.73rem;letter-spacing:2px;color:var(--navy);font-weight:700;text-transform:uppercase}
+.cert-org2{font-size:.61rem;letter-spacing:1.5px;color:#607080;text-transform:uppercase;margin-top:3px}
+.cert-title{font-size:1.75rem;font-weight:700;color:var(--navy);letter-spacing:3px;margin:16px 0 2px;text-transform:uppercase}
+.cert-rule{width:120px;height:3px;background:var(--gold);margin:8px auto 16px}
+.cert-lead{font-size:.79rem;color:#607080;letter-spacing:.5px}
+.cert-name{font-size:1.7rem;font-weight:700;color:#1a2533;margin:8px 0 3px;border-bottom:2px solid var(--border);display:inline-block;padding:0 24px 6px}
+.cert-role{font-size:.83rem;color:#607080;margin-bottom:14px}
+.cert-body{font-size:.88rem;color:#3a4a5a;line-height:1.6;max-width:560px;margin:0 auto}
+.cert-score{font-size:1.12rem;font-weight:700;color:var(--green);margin:14px 0;letter-spacing:.5px}
+.cert-foot{display:flex;justify-content:space-between;align-items:flex-end;margin-top:26px;gap:24px}
+.cert-sign{flex:1;text-align:center}
+.cert-sign-line{border-top:2px solid var(--navy);padding-top:5px;font-size:.65rem;color:#607080;letter-spacing:1px;text-transform:uppercase}
+.cert-meta{font-size:.61rem;color:#98a4b3;margin-top:18px;letter-spacing:.5px}
+.cert-actions{max-width:780px;margin:14px auto 0;display:flex;gap:10px}
+.cert-actions .btn{width:auto;flex:1}
+@media print{
+  @page{size:landscape;margin:12mm}
+  body{background:#fff}
+  body *{visibility:hidden}
+  #certificate,#certificate *{visibility:visible;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .cert-overlay{background:#fff!important;padding:0;position:absolute;inset:auto;top:0;left:0;width:100%}
+  #certificate{position:absolute;left:0;top:0;width:100%;box-shadow:none}
+  .no-print{display:none!important}
+}
+.sec-note{background:#f0f4f8;border-left:4px solid var(--navy);border-radius:0 8px 8px 0;padding:10px 12px;font-size:.75rem;color:#4a5a6a;line-height:1.6;margin-bottom:14px}
+.who-chip{background:#e8f1fb;border:1px solid #c3d9f0;border-radius:8px;padding:8px 11px;font-size:.75rem;color:var(--navy);margin-bottom:12px}
+@media(max-width:520px){
+  .grades-kpi{grid-template-columns:repeat(2,1fr)}
+  .info-grid{grid-template-columns:repeat(2,1fr)}
+  .cert-inner{padding:22px 18px 18px}
+  .cert-title{font-size:1.35rem;letter-spacing:2px}
+  .cert-name{font-size:1.3rem}
+}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-logo">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.4 8.9 8 10 4.6-1.1 8-5 8-10V6l-8-4z"/><path d="M12 8v6"/><path d="M9 11h6"/></svg>
+  </div>
+  <div class="hdr-txt">
+    <h1>CASE SCENARIOS ASSESSMENT</h1>
+    <p>PHU Malaria Onsite Coaching and Mentorship Programme</p>
+  </div>
+  <div class="hdr-timer" id="hdrTimer">45:00</div>
+</div>
+
+<div class="tab-bar">
+  <button class="tab-btn active" id="tab-quiz" onclick="showTab('quiz')">ASSESSMENT</button>
+  <button class="tab-btn" id="tab-grades" onclick="showTab('grades')">GRADES</button>
+</div>
+
+<div class="queue-strip" id="queueStrip"></div>
+
+<!-- WELCOME -->
+<div class="screen active" id="screen-welcome">
+  <div class="welcome-wrap">
+    <div class="welcome-card">
+      <div class="welcome-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 15l2 2 4-4"/></svg>
+      </div>
+      <div class="welcome-title">MODULE CASE SCENARIOS AND STRATEGIC ASSESSMENT</div>
+      <div class="welcome-sub">PHU Malaria Onsite Coaching and Mentorship Programme</div>
+      <div class="info-grid">
+        <div class="info-box"><div class="info-val" id="infoMod">10</div><div class="info-lbl">Modules</div></div>
+        <div class="info-box"><div class="info-val" id="infoQ">50</div><div class="info-lbl">Questions</div></div>
+        <div class="info-box"><div class="info-val" id="infoMin">45</div><div class="info-lbl">Minutes</div></div>
+        <div class="info-box"><div class="info-val" id="infoPass">100%</div><div class="info-lbl">Pass Mark</div></div>
+      </div>
+      <div class="mod-list">
+        <div class="mod-list-t">Modules covered</div>
+        <div class="mod-line" id="modLine"></div>
+      </div>
+      <div class="sec-note">
+        Each module opens with a field case scenario, followed by five questions on that
+        scenario. Some questions ask you to select all the answers that apply, and on those
+        you must tick every correct answer and none of the wrong ones. You can go back and
+        change an answer before you submit. Every question must be correct to pass. Your
+        score is worked out automatically and sent to the National Malaria Control Programme.
+      </div>
+      <div class="who-chip" id="whoChip" style="display:none;"></div>
+      <div class="field">
+        <label class="label">FULL NAME <span style="color:var(--red)">*</span></label>
+        <input class="input" id="participantName" placeholder="Enter your full name" autocomplete="off">
+      </div>
+      <div class="field">
+        <label class="label">ORGANISATION <span style="color:var(--red)">*</span></label>
+        <input class="input" id="participantOrg" placeholder="Enter your organisation" autocomplete="off">
+      </div>
+      <div class="field">
+        <label class="label">ROLE <span style="color:var(--red)">*</span></label>
+        <input class="input" id="participantRole" placeholder="Enter your role" autocomplete="off">
+      </div>
+      <div class="err-msg" id="welcomeErr">Please complete every field above.</div>
+      <div class="err-msg" id="alreadyDoneErr" style="font-size:.85rem;">This name has already used all attempts on this device.</div>
+      <button class="btn" onclick="startQuiz()" style="margin-top:6px;">START ASSESSMENT &rarr;</button>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div class="screen" id="screen-quiz">
+  <div class="quiz-wrap">
+    <div class="q-progress-bar"><div class="q-progress-fill" id="qProgressFill" style="width:0%"></div></div>
+    <div class="q-meta">
+      <span id="qProgress">Question 1</span>
+      <span id="qAnswered">0 answered</span>
+    </div>
+
+    <div class="mod-band">
+      <div class="mod-band-e" id="modBandE">MODULE A</div>
+      <div class="mod-band-t" id="modBandT"></div>
+    </div>
+    <div class="scen-card">
+      <div class="scen-lbl">Case scenario</div>
+      <div class="scen-txt" id="scenTxt"></div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-type multi" id="qType">SELECT ALL THAT APPLY</div>
+      <div class="q-num" id="qNum">QUESTION 1</div>
+      <div class="q-text" id="qText"></div>
+      <div class="opts" id="qOpts"></div>
+    </div>
+    <div class="q-nav">
+      <button class="q-nav-btn" onclick="prevQ()">&larr; BACK</button>
+      <button class="q-nav-btn primary" id="nextBtn" onclick="nextQ()">NEXT &rarr;</button>
+      <button class="q-nav-btn finish" id="finishBtn" onclick="finishQuiz(false)" style="display:none;">SUBMIT</button>
+    </div>
+  </div>
+</div>
+
+<!-- RESULT -->
+<div class="screen" id="screen-result">
+  <div class="result-wrap">
+    <div class="result-banner" id="resultBanner">
+      <div class="result-stamp" id="resultStamp"></div>
+      <div class="result-score" id="resultScore"></div>
+      <div class="result-name" id="resultName"></div>
+      <div class="result-verdict" id="resultVerdict"></div>
+    </div>
+    <div class="stats-row">
+      <div class="stat-box"><div class="stat-val" id="statCorrect" style="color:var(--green)">0</div><div class="stat-lbl">Correct</div></div>
+      <div class="stat-box"><div class="stat-val" id="statWrong" style="color:var(--red)">0</div><div class="stat-lbl">Wrong</div></div>
+      <div class="stat-box"><div class="stat-val" id="statPct" style="color:var(--navy)">0%</div><div class="stat-lbl">Score</div></div>
+    </div>
+    <div id="certBtnWrap" style="display:none;margin-bottom:16px;">
+      <button class="btn btn-gold" onclick="openCert()">
+        <svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M8.5 14.5 7 22l5-3 5 3-1.5-7.5"/></svg>
+        GET / PRINT CERTIFICATE
+      </button>
+    </div>
+    <div id="retakeWrap" style="display:none;margin-bottom:16px;">
+      <button class="btn" onclick="retake()" style="background:var(--navy3);">TRY AGAIN</button>
+    </div>
+    <div class="closing">
+      Your answers have been recorded. The correct answers are not shown.
+      Speak to your mentor or district supervisor to go through the scenarios.
+      <div id="sendPill" class="send-pill pend">Saving</div>
+    </div>
+  </div>
+</div>
+
+<!-- GRADES -->
+<div class="screen" id="screen-grades">
+  <div class="grades-wrap">
+    <div id="adminLoginWrap" class="admin-login">
+      <div class="welcome-card">
+        <div style="text-align:center;font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:14px;">SUPERVISOR ACCESS</div>
+        <div class="field">
+          <label class="label">PASSWORD</label>
+          <input class="input" id="adminPwd" type="password" placeholder="Enter supervisor password" onkeydown="if(event.key==='Enter')adminLogin()">
+        </div>
+        <div class="err-msg" id="adminErr">Incorrect password.</div>
+        <button class="btn" onclick="adminLogin()" style="margin-top:6px;">UNLOCK GRADES</button>
+      </div>
+    </div>
+    <div id="gradesDashboard" style="display:none;">
+      <div class="grades-kpi" id="gradesKPI"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px;">
+        <div style="font-family:'Oswald',sans-serif;font-size:.85rem;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.5px;">SUBMISSIONS ON THIS DEVICE</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button class="btn btn-gold" onclick="syncAllPending()" style="width:auto;padding:7px 14px;font-size:.78rem;">
+            <svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 3v6h-6"/></svg>
+            SYNC ALL
+          </button>
+          <button class="btn" onclick="exportCSV()" style="width:auto;padding:7px 14px;font-size:.78rem;background:var(--green);">
+            <svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 21h16"/></svg>
+            EXPORT CSV
+          </button>
+          <button class="btn" onclick="clearGrades()" style="width:auto;padding:7px 14px;font-size:.78rem;background:var(--red);">CLEAR</button>
+        </div>
+      </div>
+      <div style="overflow-x:auto;">
+        <table class="grade-table">
+          <thead><tr>
+            <th>#</th><th>Name</th><th>Organisation</th><th>Role</th>
+            <th>Score</th><th>Correct</th><th>Weakest Module</th><th>Time</th><th>Result</th><th>Date/Time</th><th>Sync</th>
+          </tr></thead>
+          <tbody id="gradeBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CERTIFICATE -->
+<div class="cert-overlay" id="certModal">
+  <div class="cert-scroll">
+    <div id="certificate">
+      <div class="cert-inner">
+        <div class="cert-seal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M8.5 14.5 7 22l5-3 5 3-1.5-7.5"/></svg>
+        </div>
+        <div class="cert-org">Informatics Consultancy Firm, Sierra Leone</div>
+        <div class="cert-org2">National Malaria Control Programme &middot; PHU Onsite Coaching and Mentorship</div>
+        <div class="cert-title">Certificate of Competency</div>
+        <div class="cert-rule"></div>
+        <div class="cert-lead">This is to certify that</div>
+        <div class="cert-name" id="certName">Not set</div>
+        <div class="cert-role" id="certRole">Not set</div>
+        <div class="cert-body">
+          has completed the <strong>Module Case Scenarios and Strategic Assessment</strong>
+          of the PHU Malaria Onsite Coaching and Mentorship Programme, answering every
+          scenario correctly across all ten modules, from facility profile and readiness
+          through to laboratory quality control, chemoprevention and the malaria vaccine.
+        </div>
+        <div class="cert-score" id="certScore">Score: 0 / 50 (0%)</div>
+        <div class="cert-foot">
+          <div class="cert-sign"><div class="cert-sign-line">Mentor</div></div>
+          <div class="cert-sign"><div class="cert-sign-line">NMCP / ICF-SL</div></div>
+        </div>
+        <div class="cert-meta" id="certMeta">Issued</div>
+      </div>
+    </div>
+    <div class="cert-actions no-print">
+      <button class="btn btn-gold" onclick="window.print()">PRINT / SAVE AS PDF</button>
+      <button class="btn" onclick="closeCert()" style="background:#607080;">CLOSE</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════════
+   CONFIG
+   ══════════════════════════════════════════════════════════════════════ */
+var GAS_URL        = '';          // paste the deployed /exec URL here
+var ADMIN_PASSWORD = 'admin12345';  // supervisor password for the GRADES tab
+var TOTAL_MINUTES  = 45;          // countdown for the whole assessment
+var PASS_PERCENT   = 100;         // every question must be correct
+var ATTEMPTS       = 1;           // attempts allowed per name on this device
+var ASSESSMENT     = 'PHU Malaria Onsite Coaching and Mentorship Programme, Module Case Scenarios and Strategic Assessment';
+var STORE          = 'phu_case_scenarios_grades';
+var OUTBOX         = 'phu_case_scenarios_outbox';
+var DEVICE_KEY     = 'phu_case_scenarios_device';
+
+/* ══════════════════════════════════════════════════════════════════════
+   QUESTION BANK
+
+   Taken straight from the mentorship document: ten modules, each with its
+   field case scenario and five questions. "ans" holds the ZERO BASED index
+   of every correct option, so an answer of [0,1,3] means options A, B and D.
+   For a select all that apply question the candidate must tick exactly that
+   set. The correct answers are never shown on screen. They are used only to
+   score the attempt and to fill the Correct Answer column in the sheet.
+
+   Question types: multi  = select all that apply
+                   best   = choose the best answer
+                   single = single correct answer
+   ══════════════════════════════════════════════════════════════════════ */
+var MODULES = [
+ {
+  "letter": "A",
+  "title": "FACILITY PROFILE & LOCATION",
+  "scenario": "During a routine mentorship visit to a rural PHU, the supervisor finds the staffing register lists only one Community Health Officer and two Community Health Assistants, with no dedicated laboratory technician on the roster. The catchment population figure on file was last updated three years ago, even though a new mining settlement has since grown nearby. No record of NMCP malaria training exists for any staff member in the past 24 months, and the current national malaria treatment guideline is not present in the consultation room.",
+  "questions": [
+   {
+    "type": "multi",
+    "q": "Which of the following should be verified when assessing PHU staffing capacity? (Select all that apply)",
+    "opts": [
+     "Cadre distribution across CHOs, CHAs, and MCHAs",
+     "Whether staff have received NMCP malaria training in the past 24 months",
+     "Staff members' preferred sports teams",
+     "Task-shifting competence for RDT performance and interpretation",
+     "The exact GPS coordinates of staff members' homes"
+    ],
+    "ans": [
+     0,
+     1,
+     3
+    ]
+   },
+   {
+    "type": "multi",
+    "q": "Which of the following are legitimate reasons for updating catchment population figures during facility profiling? (Select all that apply)",
+    "opts": [
+     "Computing accurate denominators for malaria incidence and IPTp coverage",
+     "Adjusting national parliamentary boundaries",
+     "Accounting for seasonal migration such as mining or agricultural workers",
+     "All of the above",
+     "Scheduling community football tournaments"
+    ],
+    "ans": [
+     0,
+     2
+    ]
+   },
+   {
+    "type": "best",
+    "q": "A mentor finds that structural maintenance records are missing from a PHU's profile. What is the MOST appropriate immediate action?",
+    "opts": [
+     "Note the gap informally and revisit only at the next annual review",
+     "Flag it as a facility vulnerability, document it, and integrate corrective steps into the mentorship action plan",
+     "Escalate the issue immediately to the national ministry without facility discussion",
+     "Postpone all further facility profiling until the maintenance file is rebuilt"
+    ],
+    "ans": [
+     1
+    ]
+   },
+   {
+    "type": "best",
+    "q": "Which document is the MOST authoritative source for verifying a PHU's officially approved staffing establishment?",
+    "opts": [
+     "The district health management team's personnel deployment roster",
+     "The facility's community outreach attendance sheet",
+     "The facility in-charge's personal handwritten staff list",
+     "The most recent supervision visit's exit debrief notes"
+    ],
+    "ans": [
+     0
+    ]
+   },
+   {
+    "type": "single",
+    "q": "What is the primary objective of verifying PHU identification and geographic location data during a supervisory visit?",
+    "opts": [
+     "To assess staff dress code compliance",
+     "To ensure accurate master facility list records and resource allocation mapping",
+     "To calculate individual staff monthly overtime pay",
+     "To evaluate the clinical efficacy of anti-malarial drugs"
+    ],
+    "ans": [
+     1
+    ]
+   }
+  ]
+ },
+ {
+  "letter": "B",
+  "title": "HEALTH FACILITY READINESS",
+  "scenario": "The mentor arrives to find the facility has been without malaria RDT kits for two weeks, and a carton of ACT blister packs discovered in the store room expired four months ago. The solar refrigerator has no temperature log entries for the past week and feels warm to the touch. There is no functioning motorbike or ambulance link for emergency referral, and the resuscitation tray is missing diazepam and IV fluids.",
+  "questions": [
+   {
+    "type": "multi",
+    "q": "Which of the following are core components of severe malaria emergency readiness at a PHU? (Select all that apply)",
+    "opts": [
+     "A functional communication system (phone/radio) for recalling off-duty staff",
+     "Availability of diazepam, glucose 10%, and IV fluids in the resuscitation tray",
+     "A dedicated television for patient health education",
+     "Reliable cold chain storage between +2°C and +8°C",
+     "Wall-to-wall carpeting in the consultation room"
+    ],
+    "ans": [
+     0,
+     1,
+     3
+    ]
+   },
+   {
+    "type": "multi",
+    "q": "Which practices are essential for proper medical waste and sharps management at a PHU? (Select all that apply)",
+    "opts": [
+     "Segregating waste using color-coded bins and safety boxes",
+     "Burning all plastics in the open compound",
+     "Ensuring incinerators or waste pits are functional",
+     "Storing sharps and general waste together in dustbin",
+     "Dumping liquid waste into nearby rivers"
+    ],
+    "ans": [
+     0,
+     2
+    ]
+   },
+   {
+    "type": "best",
+    "q": "The mentor finds RDT stock at 40% of average monthly consumption with two weeks until the next scheduled resupply. What is the MOST appropriate response?",
+    "opts": [
+     "Wait for the scheduled resupply since some stock remains",
+     "Immediately arrange emergency redistribution from a neighboring facility and flag the stock trend",
+     "Ration RDTs by only testing children under five",
+     "Instruct staff to revert to presumptive treatment until restock arrives"
+    ],
+    "ans": [
+     1
+    ]
+   },
+   {
+    "type": "best",
+    "q": "Which cold chain finding should be treated as the MOST urgent readiness concern?",
+    "opts": [
+     "A temperature log with two missing entries this month",
+     "A refrigerator reading of +9°C sustained for the past two days",
+     "A refrigerator with faded exterior paint from sun exposure",
+     "A solar panel that is slightly dusty but still generating power"
+    ],
+    "ans": [
+     1
+    ]
+   },
+   {
+    "type": "single",
+    "q": "What does operational referral readiness specifically require at a peripheral health unit?",
+    "opts": [
+     "A functioning communication system (phone/radio) and pre-identified emergency transport protocols",
+     "Luxury guest rooms for visiting supervisors",
+     "On-site surgical theaters for major operations",
+     "Exclusive helicopter landing pads at every clinic"
+    ],
+    "ans": [
+     0
+    ]
+   }
+  ]
+ },
+ {
+  "letter": "C",
+  "title": "RDTS, ACT & TREATMENT COMPLIANCE",
+  "scenario": "While shadowing consultations, the mentor observes a clinician prescribe a full ACT course to a febrile child based on history alone, without performing an RDT. In another consultation, the RDT result is read within five minutes window, and the first ACT dose is handed to the caregiver to take at home rather than being observed on-site.",
+  "questions": [
+   {
+    "type": "multi",
+    "q": "Which of the following are required steps in performing and interpreting a malaria RDT correctly? (Select all that apply)",
+    "opts": [
+     "Confirming the control line (C) appears before interpreting results",
+     "Waiting the manufacturer-specified reading window (e.g., 15–20 minutes)",
+     "Reading the result within 5 minutes to save time",
+     "Using the correct capillary blood volume specified by the kit",
+     "Shaking the cassette vigorously to speed up the reaction"
+    ],
+    "ans": [
+     0,
+     1,
+     3
+    ]
+   },
+   {
+    "type": "multi",
+    "q": "Which actions represent correct management of a patient with a negative RDT result? (Select all that apply)",
+    "opts": [
+     "Investigating alternative causes of fever such as UTI or respiratory infection",
+     "Immediately prescribing a full ACT course despite the negative result",
+     "Refer patient on danger signs further investigation and management",
+     "Prescribing antibiotics automatically for any viral-looking fever",
+     "Discarding the negative result and repeating with the same used cassette"
+    ],
+    "ans": [
+     0,
+     2
+    ]
+   },
+   {
+    "type": "best",
+    "q": "A clinician hands a child's first ACT dose to the caregiver to give at home rather than observing it on-site. What is the MOST significant risk this creates?",
+    "opts": [
+     "The caregiver may store the medication in a slightly warm cupboard",
+     "The mentor cannot verify whether the child actually took the correct first dose or vomited it, undermining treatment monitoring",
+     "The blister pack packaging may get slightly damaged in transit",
+     "The facility's ACT stock count will be one dose short for the day"
+    ],
+    "ans": [
+     1
+    ]
+   },
+   {
+    "type": "best",
+    "q": "Which scenario BEST reflects a breakdown of the test-all policy at a PHU?",
+    "opts": [
+     "A clinician orders an RDT for a child with low-grade fever after examining her",
+     "A clinician prescribes a full ACT course to a febrile adult based on history alone, without an RDT or microscopy",
+     "A clinician orders microscopy instead of RDT because the lab technician is available",
+     "A clinician's RDT reading is delayed by ten minutes while waiting for the reading window"
+    ],
+    "ans": [
+     1
+    ]
+   },
+   {
+    "type": "single",
+    "q": "What is the gold standard diagnostic recommendation before initiating anti-malarial treatment?",
+    "opts": [
+     "Prescribing treatment purely based on patient history of fever",
+     "Confirmatory parasitological diagnosis using microscopy or Malaria RDT",
+     "Visual inspection of the patient's eyes and tongue color",
+     "Measuring the patient's height and weight ratio"
+    ],
+    "ans": [
+     1
+    ]
+   }
+  ]
+ },
+ {
+  "letter": "D",
+  "title": "DATA QUALITY & HMIS VERIFICATION",
+  "scenario": "A register audit reveals several OPD entries with blank diagnosis and treatment columns. The monthly DHIS2 summary form shows 42 confirmed malaria cases, while the tally sheet for the same period totals only 35. Under-5 and over-5 malaria cases are also mixed in several rows, and one incorrect entry has been blacked out completely with correction fluid rather than a single cancellation line.",
+  "questions": [
+   {
+    "type": "multi",
+    "q": "Which of the following indicate a data quality problem during an HMIS register review? (Select all that apply)",
+    "opts": [
+     "Blank cells in mandatory columns such as diagnosis or treatment",
+     "A tally sheet total that does not match the DHIS2 monthly summary",
+     "Neat handwriting using blue ink",
+     "An error corrected using correction fluid instead of a single cancellation line",
+     "Page numbers present on every folio"
+    ],
+    "ans": [
+     0,
+     1,
+     3
+    ]
+   },
+   {
+    "type": "multi",
+    "q": "Which practices support proper data verification at facility level? (Select all that apply)",
+    "opts": [
+     "Auditing source documents to confirm reported numbers reflect actual services",
+     "Relying solely on computer software without checking paper registers",
+     "Cross-checking tally sheets against the OPD register and summary forms",
+     "Allowing verification to be performed only by international auditors",
+     "Skipping verification when attendance figures look reasonable"
+    ],
+    "ans": [
+     0,
+     2
+    ]
+   },
+   {
+    "type": "best",
+    "q": "Which explanation is the MOST likely root cause when a facility's DHIS2 summary consistently over-reports confirmed malaria cases compared to the tally sheet?",
+    "opts": [
+     "The DHIS2 platform automatically inflates figures each month",
+     "Tallying fatigue or transcription errors during monthly aggregation",
+     "The catchment population grew unexpectedly that month",
+     "National reporting deadlines were extended"
+    ],
+    "ans": [
+     1
+    ]
+   },
+   {
+    "type": "best",
+    "q": "A mentor finds an OPD register entry crossed out and rewritten with no explanation. What is the BEST corrective action?",
+    "opts": [
+     "Ignore it since the new entry is legible",
+     "Coach the records clerk on proper single-line cancellation with initials and date to preserve the audit trail",
+     "Remove the page from the register entirely",
+     "Report the clerk to the district for disciplinary action"
+    ],
+    "ans": [
+     1
+    ]
+   },
+   {
+    "type": "single",
+    "q": "What is a key indicator of incomplete data recording in clinical registers?",
+    "opts": [
+     "Blank spaces in mandatory columns such as diagnosis, age, or treatment dispensed",
+     "Neat handwriting in blue ink",
+     "High total patient attendance figures",
+     "Presence of page numbers on every folio"
+    ],
+    "ans": [
+     0
+    ]
+   }
+  ]
+ },
+ {
+  "letter": "E",
+  "title": "COMMUNITY: IPTP, ITNS & OUTREACH",
+  "scenario": "A pregnant woman attending her third ANC visit at 26 weeks has not yet received her first dose of SP, well past the recommended 13-week start. Staff report that SP tablets are sometimes given to women to swallow at home rather than under direct observation. The ITN distribution register has several issued nets with no recipient signature or thumbprint, and the CHW serving the most remote village has not received an RDT/ACT resupply in two months.",
+  "questions": [
+   {
+    "type": "multi",
+    "q": "Which of the following are core requirements for correct IPTp-SP administration? (Select all that apply)",
+    "opts": [
+     "Starting SP as early as possible from 13 weeks of gestation",
+     "Observing the pregnant woman swallow the tablets at the facility (DOT)",
+     "Giving tablets to the woman to take home for convenience",
+     "Spacing doses at least one month apart until delivery",
+     "Administering SP only during active labor"
+    ],
+    "ans": [
+     0,
+     1,
+     3
+    ]
+   },
+   {
+    "type": "multi",
+    "q": "Which findings represent gaps in ITN distribution and record-keeping that a mentor should flag? (Select all that apply)",
+    "opts": [
+     "Issued nets recorded without recipient signature or thumbprint",
+     "Net stock reconciled monthly against the distribution register",
+     "A discrepancy between physical net balance and register issuance",
+     "Nets distributed only at ANC and immunization contact points",
+     "Community distributors trained on hanging and usage counseling"
+    ],
+    "ans": [
+     0,
+     2
+    ]
+   },
+   {
+    "type": "best",
+    "q": "A CHW has not received an RDT/ACT resupply for two months. What is the MOST appropriate mentor response?",
+    "opts": [
+     "Note it for the annual district report",
+     "Immediately investigate the restocking pipeline, arrange interim resupply, and document the gap in the action plan",
+     "Instruct the CHW to refer all fever cases to the facility, with no other action",
+     "Replace the CHW with a new volunteer"
+    ],
+    "ans": [
+     1
+    ]
+   },
+   {
+    "type": "best",
+    "q": "Which scenario BEST demonstrates a failure of direct observed therapy (DOT) for IPTp?",
+    "opts": [
+     "A nurse watches the woman swallow the SP tablets with water at the ANC clinic",
+     "SP tablets are given to a pregnant woman to swallow later at home",
+     "A nurse records the SP dose in the ANC register immediately after administration",
+     "A nurse counsels the woman on nausea management before giving the dose"
+    ],
+    "ans": [
+     1
+    ]
+   },
+   {
+    "type": "single",
+    "q": "Why are community outreach activities vital for malaria prevention and control?",
+    "opts": [
+     "They replace fixed health facilities entirely",
+     "They bridge geographical barriers, reaching remote populations with health education, ITNs, and screening",
+     "They reduce the administrative workload of district health officers",
+     "They generate revenue through commercial product sales"
+    ],
+    "ans": [
+     1
+    ]
+   }
+  ]
+ },
+ {
+  "letter": "F",
+  "title": "SEVERE MALARIA REFERRAL PATHWAY",
+  "scenario": "A child brought in with impaired consciousness and repeated convulsions is left waiting in the routine OPD queue for twenty minutes before being triaged. No rectal artesunate is administered before transfer, and the referral slip sent with the patient omits vital signs and the exact time of transfer. The facility motorbike ambulance has no fuel, delaying dispatch by over two hours.",
+  "questions": [
+   {
+    "type": "multi",
+    "q": "Which clinical findings should trigger urgent pre-referral treatment for severe malaria? (Select all that apply)",
+    "opts": [
+     "Prostration or impaired consciousness",
+     "Repeated convulsions",
+     "Normal appetite and playful behavior",
+     "Severe palmar pallor with respiratory distress",
+     "A mild, self-resolving headache"
+    ],
+    "ans": [
+     0,
+     1,
+     3
+    ]
+   },
+   {
+    "type": "multi",
+    "q": "Which elements must be included when preparing a patient for referral to a secondary hospital? (Select all that apply)",
+    "opts": [
+     "A completed referral form with vital signs, treatment given, and time of transfer",
+     "Advance notice to the receiving hospital to prepare for the incoming case",
+     "A request for reimbursement of the family's travel costs",
+     "The clinic's electricity consumption report for the month",
+     "The patient's personal photo album"
+    ],
+    "ans": [
+     0,
+     1
+    ]
+   },
+   {
+    "type": "best",
+    "q": "A child with impaired consciousness arrives at a PHU with no fuel available for the motorbike ambulance. What is the MOST appropriate immediate action?",
+    "opts": [
+     "Wait for fuel to become available before doing anything else",
+     "Give pre-referral rectal artesunate or IV/IM artesunate immediately while mobilizing alternative transport",
+     "Discharge the child home with oral antimalarials until transport is arranged",
+     "Delay treatment until the ambulance is refueled to avoid an incomplete regimen"
+    ],
+    "ans": [
+     1
+    ]
+   },
+   {
+    "type": "best",
+    "q": "Which delay is the MOST critical bottleneck for a mentor to address in a facility's referral pathway?",
+    "opts": [
+     "A two-minute delay in filling out the referral slip",
+     "A twenty-minute wait in the routine OPD queue before a convulsing child is triaged",
+     "A slightly worn referral slip template",
+     "A receiving hospital that is five kilometers further than the nearest option"
+    ],
+    "ans": [
+     1
+    ]
+   },
+   {
+    "type": "single",
+    "q": "What is the primary objective of administering pre-referral rectal artesunate or injectable treatment at a PHU?",
+    "opts": [
+     "To cure the patient completely without needing hospital transfer",
+     "To rapidly reduce parasite biomass and prevent death or neurological damage during transit",
+     "To test the expiration date of emergency drug stocks",
+     "To calm the patient down before administrative paperwork is completed"
+    ],
+    "ans": [
+     1
+    ]
+   }
+  ]
+ },
+ {
+  "letter": "G",
+  "title": "SUPERVISOR FEEDBACK & ACTION PLAN",
+  "scenario": "At the start of the visit, the mentor does not review the action plan from the previous supervision, so it is unclear which corrective actions were completed. During the exit debrief, feedback is delivered mostly in front of waiting patients and focuses only on what went wrong. The visit ends without a written, time-bound action plan or a named person responsible for each corrective step.",
+  "questions": [
+   {
+    "type": "multi",
+    "q": "Which practices characterize supportive supervision rather than punitive inspection? (Select all that apply)",
+    "opts": [
+     "Joint problem-solving with facility staff",
+     "Active listening and open-ended questioning",
+     "Public reprimand of staff in front of patients",
+     "Co-designing SMART corrective actions with the team",
+     "Threatening staff with disciplinary action for every gap found"
+    ],
+    "ans": [
+     0,
+     1,
+     3
+    ]
+   },
+   {
+    "type": "multi",
+    "q": "Which elements should a Mentorship Action Plan include to be effective? (Select all that apply)",
+    "opts": [
+     "Specific, time-bound corrective steps",
+     "A named person responsible for each action",
+     "Vague general statements like 'do better next time'",
+     "Secret scoring known only to the supervisor",
+     "A blanket salary deduction for all staff"
+    ],
+    "ans": [
+     0,
+     1
+    ]
+   },
+   {
+    "type": "best",
+    "q": "At the exit debrief, staff appear defensive when a gap is raised. What is the MOST effective mentor response?",
+    "opts": [
+     "Insist on the point repeatedly until the staff member agrees",
+     "Acknowledge their operational challenges, validate constraints, and collaboratively explore solutions",
+     "Move on quickly to the next topic without further discussion",
+     "Write up the gap silently and raise it only in the district report"
+    ],
+    "ans": [
+     1
+    ]
+   },
+   {
+    "type": "best",
+    "q": "Which finding should be escalated to the District Health Management Team rather than resolved on-site?",
+    "opts": [
+     "A missing job aid that can be reprinted and posted immediately",
+     "A structural staffing shortage beyond the facility's authority to fill",
+     "A drug storage area that needs minor reorganizing",
+     "A register column that was filled in incorrectly that day"
+    ],
+    "ans": [
+     1
+    ]
+   },
+   {
+    "type": "single",
+    "q": "What format should facility action plan ratings follow to ensure measurable progress?",
+    "opts": [
+     "Vague statements like 'do better next time'",
+     "SMART criteria (Specific, Measurable, Achievable, Relevant, Time-bound) with designated responsible persons",
+     "Secret codes known only to the supervisor",
+     "Random numerical scores from 1 to 1000 without explanations"
+    ],
+    "ans": [
+     1
+    ]
+   }
+  ]
+ },
+ {
+  "letter": "H",
+  "title": "LABORATORY MICROSCOPY & QUALITY CONTROL",
+  "scenario": "The binocular microscope's objective lens is visibly dusty and has not been cleaned in recent memory. A bottle of Giemsa stain in use expired five months ago, and no positive or negative control slides have been archived for external quality assurance. Used lancets and slides are found discarded into an open waste bin rather than a puncture-resistant safety box.",
+  "questions": [
+   {
+    "type": "multi",
+    "q": "Which practices are essential for maintaining reliable malaria microscopy results? (Select all that apply)",
+    "opts": [
+     "Regular cleaning of microscope lenses to prevent dust/oil buildup",
+     "Using Giemsa stain within its expiry date and correct dilution",
+     "Reusing the same unfiltered stain solution for a full year",
+     "Archiving positive and negative slides for external quality assurance",
+     "Reading slides under direct sunlight for better visibility"
+    ],
+    "ans": [
+     0,
+     1,
+     3
+    ]
+   },
+   {
+    "type": "multi",
+    "q": "Which biosafety practices must be verified in the laboratory? (Select all that apply)",
+    "opts": [
+     "Disposing of lancets and slides in puncture-resistant safety boxes",
+     "Sweeping used slides into the general office dustbin",
+     "Using PPE (gloves, coats, eye protection) during staining",
+     "Reusing disposable lancets across multiple patients",
+     "Eating and drinking inside the active processing area"
+    ],
+    "ans": [
+     0,
+     2
+    ]
+   },
+   {
+    "type": "best",
+    "q": "A facility's Giemsa stain expired five months ago but is still in use. What is the MOST significant consequence?",
+    "opts": [
+     "The stain solution will develop an unusual odor",
+     "Blood films may be poorly stained, risking false-negative or false-positive parasite readings",
+     "The bottle's label will fade faster",
+     "Staining will simply take longer than usual"
+    ],
+    "ans": [
+     1
+    ]
+   },
+   {
+    "type": "best",
+    "q": "Which laboratory finding is the MOST urgent quality control concern for a mentor to address?",
+    "opts": [
+     "The microscope's exterior casing has minor scratches",
+     "No positive or negative control slides have been archived for external quality assurance in over a year",
+     "The lab register uses a slightly different date format than the district template",
+     "The staining rack is a few years old but functional"
+    ],
+    "ans": [
+     1
+    ]
+   },
+   {
+    "type": "single",
+    "q": "What safety protocol governs the disposal of contaminated glass slides and lancets in the laboratory?",
+    "opts": [
+     "Discarding them in puncture-proof safety boxes and incinerating according to biohazard guidelines",
+     "Throwing them into open compound trash heaps",
+     "Washing and reusing disposable lancets for multiple patients",
+     "Sweeping them into general office dustbins"
+    ],
+    "ans": [
+     0
+    ]
+   }
+  ]
+ },
+ {
+  "letter": "I",
+  "title": "PERENNIAL MALARIA CHEMOPREVENTION (PMC)",
+  "scenario": "An infant returning for the 14-week immunization contact receives pentavalent and OPV, but the accompanying PMC dose is overlooked entirely. The health worker later confirms the SP dose was in fact given, but the dedicated PMC column in the child health register was left blank. On another occasion, SP tablets are handed to a mother to administer to her infant at home rather than being given under direct observation.",
+  "questions": [
+   {
+    "type": "multi",
+    "q": "Which conditions must be verified before administering a PMC dose to an infant? (Select all that apply)",
+    "opts": [
+     "Age matches the scheduled EPI/PMC contact point",
+     "No acute severe illness present at the time of the visit",
+     "The infant's ability to walk independently",
+     "No known allergy to sulfadoxine-pyrimethamine",
+     "Parental consent via a notarized legal document"
+    ],
+    "ans": [
+     0,
+     1,
+     3
+    ]
+   },
+   {
+    "type": "multi",
+    "q": "Which of the following represent correct PMC documentation and administration practice? (Select all that apply)",
+    "opts": [
+     "Ticking the dedicated PMC column in the child health register at each dose",
+     "Observing the infant swallow the dose directly at the facility (DOT)",
+     "Sending SP tablets home with the mother to give later",
+     "Leaving the PMC register column blank if the vaccine columns are already filled",
+     "Administering PMC regardless of a current acute illness"
+    ],
+    "ans": [
+     0,
+     1
+    ]
+   },
+   {
+    "type": "best",
+    "q": "An infant returns for the 14-week EPI visit with fever and acute illness on the scheduled PMC day. What is the MOST appropriate action?",
+    "opts": [
+     "Administer the PMC dose as scheduled to avoid a missed dose",
+     "Manage the acute illness first, defer the PMC dose, and reschedule once the infant recovers",
+     "Give a half-dose of SP as a compromise",
+     "Discard the child's PMC eligibility permanently"
+    ],
+    "ans": [
+     1
+    ]
+   },
+   {
+    "type": "best",
+    "q": "A child's immunization card shows all vaccines given, but the PMC dose column is empty despite SP being administered. What is the MOST likely explanation?",
+    "opts": [
+     "The health worker forgot to tick the dedicated PMC column while focused on the vaccine columns",
+     "The child was not actually eligible for PMC that day",
+     "The register was recently replaced with a new format",
+     "The SP dose was given by a different facility"
+    ],
+    "ans": [
+     0
+    ]
+   },
+   {
+    "type": "single",
+    "q": "What is the primary clinical objective of Perennial Malaria Chemoprevention (PMC), formerly known as IPTi?",
+    "opts": [
+     "To treat severe malaria in adult patients",
+     "To provide intermittent doses of antimalarial medicine to infants at specified age intervals to reduce malaria illness and anemia",
+     "To vaccinate infants against childhood tuberculosis",
+     "To replace routine infant nutritional supplementation"
+    ],
+    "ans": [
+     1
+    ]
+   }
+  ]
+ },
+ {
+  "letter": "J",
+  "title": "MALARIA VACCINE (RTS,S)",
+  "scenario": "The immunization refrigerator's twice-daily temperature log has three consecutive blank days, and staff cannot confirm whether the cold chain held during that period. During a vaccination session, the Vaccine Vial Monitor is not checked before a dose is drawn up, and an opened multi-dose vial is found still in use nine hours after opening, beyond the facility's stated discard window.",
+  "questions": [
+   {
+    "type": "multi",
+    "q": "Which practices are essential for correct cold chain management of RTS,S vaccine? (Select all that apply)",
+    "opts": [
+     "Maintaining storage strictly between +2°C and +8°C",
+     "Recording temperatures twice daily on a monitoring chart",
+     "Allowing brief freezing since RTS,S is heat-stable",
+     "Checking the Vaccine Vial Monitor (VVM) before administering a dose",
+     "Storing vials in the freezer compartment for extra cold protection"
+    ],
+    "ans": [
+     0,
+     1,
+     3
+    ]
+   },
+   {
+    "type": "multi",
+    "q": "Which practices reflect correct open-vial policy compliance for RTS,S? (Select all that apply)",
+    "opts": [
+     "Discarding an opened multi-dose vial after the manufacturer's allowed time limit",
+     "Keeping opened vials on the desk overnight for the next day's session",
+     "Recording the opening time and date on the vial label",
+     "Re-freezing an opened vial for future use",
+     "Mixing leftover doses from two different opened vials together"
+    ],
+    "ans": [
+     0,
+     2
+    ]
+   },
+   {
+    "type": "best",
+    "q": "The refrigerator temperature log shows three consecutive blank days. What is the MOST appropriate mentor action?",
+    "opts": [
+     "Assume the cold chain held since the vaccines look fine",
+     "Treat the gap as a potential cold chain break, verify vaccine condition, and reinforce twice-daily logging",
+     "Discard all vaccines in the refrigerator immediately without further checks",
+     "Wait until the next scheduled supervision visit to review the log"
+    ],
+    "ans": [
+     1
+    ]
+   },
+   {
+    "type": "best",
+    "q": "Which cold chain deviation poses the MOST immediate risk to vaccine potency?",
+    "opts": [
+     "A temperature log with a two-day gap in entries",
+     "A refrigerator temperature that dropped below 0°C, potentially freezing a liquid vaccine",
+     "A slightly faded temperature chart taped to the refrigerator door",
+     "A refrigerator door left open for a few seconds during restocking"
+    ],
+    "ans": [
+     1
+    ]
+   },
+   {
+    "type": "single",
+    "q": "What is the acceptable temperature range for storing routine vaccines, including malaria vaccines, in a vaccine refrigerator?",
+    "opts": [
+     "Minus 20°C to minus 10°C",
+     "Plus 2°C to plus 8°C",
+     "Plus 15°C to plus 25°C",
+     "Plus 30°C to plus 40°C"
+    ],
+    "ans": [
+     1
+    ]
+   }
+  ]
+ }
+];
+
+/* flatten the modules into one running list of questions */
+var QUESTIONS = [];
+(function flatten(){
+  for (var m = 0; m < MODULES.length; m++) {
+    var mod = MODULES[m];
+    for (var i = 0; i < mod.questions.length; i++) {
+      var q = mod.questions[i];
+      QUESTIONS.push({
+        module     : mod.letter,
+        moduleTitle: mod.title,
+        scenario   : mod.scenario,
+        nInModule  : i + 1,
+        type       : q.type,
+        q          : q.q,
+        opts       : q.opts,
+        ans        : q.ans
+      });
+    }
+  }
+})();
+
+var TYPE_LABEL = {
+  multi : 'SELECT ALL THAT APPLY',
+  best  : 'CHOOSE THE BEST ANSWER',
+  single: 'SINGLE CORRECT ANSWER'
+};
+
+/* ══════════════════════════════════════════════════════════════════════
+   STATE
+   ══════════════════════════════════════════════════════════════════════ */
+var participant   = { name:'', org:'', role:'' };
+var current       = 0;
+var answers       = [];          // each entry is an array of chosen indexes
+var adminLoggedIn = false;
+var timerInterval = null;
+var secondsLeft   = TOTAL_MINUTES * 60;
+var quizStartTime = null;
+var lastGrade     = null;
+
+document.getElementById('infoMod').textContent  = MODULES.length;
+document.getElementById('infoQ').textContent    = QUESTIONS.length;
+document.getElementById('infoMin').textContent  = TOTAL_MINUTES;
+document.getElementById('infoPass').textContent = PASS_PERCENT + '%';
+document.getElementById('modLine').innerHTML    = MODULES.map(function(m){
+  return '<b>' + m.letter + '</b> ' + esc(titleCase(m.title));
+}).join('  &middot;  ');
+
+function titleCase(s){
+  return String(s).toLowerCase().replace(/\b([a-z])/g, function(x){ return x.toUpperCase(); })
+                  .replace(/\bRdts\b/,'RDTs').replace(/\bHmis\b/,'HMIS')
+                  .replace(/\bAct\b/,'ACT').replace(/\bIptp\b/,'IPTp')
+                  .replace(/\bItns\b/,'ITNs').replace(/\bPmc\b/,'PMC')
+                  .replace(/Rts,s/i,'RTS,S');
+}
+
+function deviceId() {
+  var id = '';
+  try { id = localStorage.getItem(DEVICE_KEY) || ''; } catch(e) { return 'no-storage'; }
+  if (!id) {
+    id = 'DEV-' + Math.random().toString(36).slice(2, 10).toUpperCase();
+    try { localStorage.setItem(DEVICE_KEY, id); } catch(e) {}
+  }
+  return id;
+}
+function read(key) {
+  try { return JSON.parse(localStorage.getItem(key) || '[]'); } catch(e) { return []; }
+}
+function save(key, val) {
+  try { localStorage.setItem(key, JSON.stringify(val)); return true; } catch(e) { return false; }
+}
+function esc(s) {
+  return String(s == null ? '' : s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+function letters(idxs, opts) {
+  if (!idxs || !idxs.length) return '(not answered)';
+  return idxs.slice().sort(function(a,b){return a-b;}).map(function(i){
+    return String.fromCharCode(65 + i) + ') ' + opts[i];
+  }).join('  |  ');
+}
+function sameSet(a, b) {
+  if (!a || a.length !== b.length) return false;
+  var x = a.slice().sort(), y = b.slice().sort();
+  for (var i = 0; i < x.length; i++) if (x[i] !== y[i]) return false;
+  return true;
+}
+
+/* carry the name over if the supervisor signed in on a data collection form */
+(function prefill(){
+  try {
+    var u = JSON.parse(sessionStorage.getItem('mocm_user'));
+    if (u && u.name) {
+      document.getElementById('participantName').value = u.name;
+      var chip = document.getElementById('whoChip');
+      chip.textContent = 'Signed in as ' + u.name + ' (' + u.username + ')';
+      chip.style.display = 'block';
+    }
+  } catch(e) {}
+})();
+
+/* ══════════════════════════════════════════════════════════════════════
+   TABS AND SCREENS
+   ══════════════════════════════════════════════════════════════════════ */
+function showTab(tab) {
+  var btns = document.querySelectorAll('.tab-btn');
+  for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+  document.getElementById('tab-' + tab).classList.add('active');
+  if (tab === 'quiz') {
+    if (!document.getElementById('screen-result').classList.contains('active')) showScreen('welcome');
+  } else {
+    showScreen('grades');
+    if (adminLoggedIn) renderGrades();
+  }
+}
+function showScreen(name) {
+  var screens = document.querySelectorAll('.screen');
+  for (var i = 0; i < screens.length; i++) screens[i].classList.remove('active');
+  document.getElementById('screen-' + name).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   START
+   ══════════════════════════════════════════════════════════════════════ */
+function startQuiz() {
+  var name = document.getElementById('participantName').value.trim();
+  var org  = document.getElementById('participantOrg').value.trim();
+  var role = document.getElementById('participantRole').value.trim();
+
+  document.getElementById('welcomeErr').style.display     = 'none';
+  document.getElementById('alreadyDoneErr').style.display = 'none';
+
+  if (!name || !org || !role) {
+    document.getElementById('welcomeErr').style.display = 'block'; return;
+  }
+
+  var used = read(STORE).filter(function(g){
+    return (g.name || '').toLowerCase() === name.toLowerCase();
+  }).length;
+  if (used >= ATTEMPTS) { document.getElementById('alreadyDoneErr').style.display = 'block'; return; }
+
+  participant   = { name:name, org:org, role:role };
+  current       = 0;
+  answers       = [];
+  for (var i = 0; i < QUESTIONS.length; i++) answers.push([]);
+  secondsLeft   = TOTAL_MINUTES * 60;
+  quizStartTime = Date.now();
+
+  showScreen('quiz');
+  renderQuestion();
+  startTimer();
+}
+
+function retake() {
+  clearInterval(timerInterval);
+  document.getElementById('participantName').value = participant.name;
+  document.getElementById('participantOrg').value  = participant.org;
+  document.getElementById('participantRole').value = participant.role;
+  showScreen('welcome');
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   TIMER
+   ══════════════════════════════════════════════════════════════════════ */
+function startTimer() {
+  var t = document.getElementById('hdrTimer');
+  t.style.display = 'block';
+  updateTimerDisplay();
+  clearInterval(timerInterval);
+  timerInterval = setInterval(function(){
+    secondsLeft--;
+    updateTimerDisplay();
+    if (secondsLeft <= 0) { clearInterval(timerInterval); finishQuiz(true); }
+  }, 1000);
+}
+function updateTimerDisplay() {
+  var t = document.getElementById('hdrTimer');
+  var m = Math.floor(secondsLeft / 60), s = secondsLeft % 60;
+  t.textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+  t.classList.toggle('urgent', secondsLeft <= 60);
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   QUESTIONS
+   ══════════════════════════════════════════════════════════════════════ */
+function renderQuestion() {
+  var q = QUESTIONS[current];
+  var total = QUESTIONS.length;
+  var answered = 0;
+  for (var i = 0; i < answers.length; i++) if (answers[i].length) answered++;
+
+  document.getElementById('qProgressFill').style.width = (current / total * 100) + '%';
+  document.getElementById('qProgress').textContent = 'Question ' + (current + 1) + ' of ' + total;
+  document.getElementById('qAnswered').textContent = answered + ' answered';
+
+  document.getElementById('modBandE').textContent = 'MODULE ' + q.module + '  ·  QUESTION ' + q.nInModule + ' OF 5';
+  document.getElementById('modBandT').textContent = titleCase(q.moduleTitle);
+  document.getElementById('scenTxt').textContent  = q.scenario;
+
+  var chip = document.getElementById('qType');
+  chip.className = 'q-type ' + q.type;
+  chip.textContent = TYPE_LABEL[q.type];
+
+  document.getElementById('qNum').textContent  = 'QUESTION ' + (current + 1);
+  document.getElementById('qText').textContent = q.q;
+
+  var multi = q.type === 'multi';
+  var html = '';
+  for (var j = 0; j < q.opts.length; j++) {
+    var sel = answers[current].indexOf(j) > -1 ? ' selected' : '';
+    var letter = String.fromCharCode(65 + j);
+    html += '<div class="opt' + sel + '" onclick="selectOption(' + j + ')">' +
+            '<div class="opt-circle' + (multi ? ' opt-box' : '') + '">' + letter + '</div>' +
+            '<div class="opt-text">' + esc(q.opts[j]) + '</div></div>';
+  }
+  document.getElementById('qOpts').innerHTML = html;
+
+  var last = current === total - 1;
+  document.getElementById('nextBtn').style.display   = last ? 'none' : 'block';
+  document.getElementById('finishBtn').style.display = last ? 'block' : 'none';
+}
+
+function selectOption(i) {
+  var q = QUESTIONS[current];
+  if (q.type === 'multi') {
+    var at = answers[current].indexOf(i);
+    if (at > -1) answers[current].splice(at, 1); else answers[current].push(i);
+  } else {
+    answers[current] = [i];
+  }
+  renderQuestion();
+}
+function prevQ() { if (current > 0) { current--; renderQuestion(); } }
+function nextQ() {
+  if (!answers[current].length) { alert('Please select an answer first.'); return; }
+  if (current < QUESTIONS.length - 1) { current++; renderQuestion(); }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   FINISH AND SCORE
+   Scoring happens here and nowhere on screen. The candidate is shown the
+   score and the verdict only, never which questions were wrong and never
+   the correct answer. A select all that apply question is right only when
+   the chosen set matches the correct set exactly.
+   ══════════════════════════════════════════════════════════════════════ */
+function finishQuiz(timedOut) {
+  if (!timedOut) {
+    var missing = -1;
+    for (var i = 0; i < answers.length; i++) if (!answers[i].length) { missing = i; break; }
+    if (missing > -1) {
+      current = missing; renderQuestion();
+      alert('Question ' + (missing + 1) + ' has not been answered.');
+      return;
+    }
+  }
+  clearInterval(timerInterval);
+  document.getElementById('hdrTimer').style.display = 'none';
+
+  var total = QUESTIONS.length;
+  var correct = 0;
+  var responses = [];
+  var byModule = {};
+
+  for (var k = 0; k < total; k++) {
+    var q  = QUESTIONS[k];
+    var ok = sameSet(answers[k], q.ans);
+    if (ok) correct++;
+
+    if (!byModule[q.module]) byModule[q.module] = { correct:0, total:0, title:q.moduleTitle };
+    byModule[q.module].total++;
+    if (ok) byModule[q.module].correct++;
+
+    responses.push({
+      n          : k + 1,
+      module     : q.module,
+      moduleTitle: q.moduleTitle,
+      qType      : TYPE_LABEL[q.type],
+      question   : q.q,
+      givenText  : letters(answers[k], q.opts),
+      correctText: letters(q.ans, q.opts),
+      ok         : ok
+    });
+  }
+
+  var moduleScores = [];
+  for (var L in byModule) {
+    moduleScores.push({ module:L, title:byModule[L].title,
+                        correct:byModule[L].correct, total:byModule[L].total });
+  }
+  moduleScores.sort(function(a,b){ return a.module < b.module ? -1 : 1; });
+
+  var weakest = moduleScores.slice().sort(function(a,b){ return a.correct - b.correct; })[0];
+
+  var pct     = total ? Math.round(correct / total * 100) : 0;
+  var pass    = !timedOut && pct >= PASS_PERCENT;
+  var secUsed = Math.min(TOTAL_MINUTES * 60, Math.round((Date.now() - quizStartTime) / 1000));
+  var timeUsed = String(Math.floor(secUsed / 60)).padStart(2,'0') + ':' + String(secUsed % 60).padStart(2,'0');
+  var now = new Date();
+
+  var grade = {
+    attemptId   : 'CS-' + now.getTime() + '-' + Math.floor(Math.random() * 9000 + 1000),
+    assessment  : ASSESSMENT,
+    name        : participant.name,
+    org         : participant.org,
+    role        : participant.role,
+    correct     : correct,
+    total       : total,
+    pct         : pct,
+    pass        : pass,
+    timedOut    : !!timedOut,
+    timeUsed    : timeUsed,
+    datetime    : now.toLocaleString('en-GB'),
+    timestamp   : now.getTime(),
+    deviceId    : deviceId(),
+    moduleScores: moduleScores,
+    weakest     : weakest ? (weakest.module + ' (' + weakest.correct + '/' + weakest.total + ')') : '',
+    responses   : responses,
+    synced      : false
+  };
+
+  var grades = read(STORE);
+  grades.push(grade);
+  save(STORE, grades);
+
+  lastGrade = grade;
+  paintResult(grade);
+  showScreen('result');
+  sendGrade(grade);
+}
+
+function paintResult(g) {
+  var banner = document.getElementById('resultBanner');
+  banner.className = 'result-banner ' + (g.timedOut ? 'timeout' : g.pass ? 'pass' : 'fail');
+
+  document.getElementById('resultStamp').innerHTML = g.timedOut
+    ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>'
+    : g.pass
+    ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M8.5 14.5 7 22l5-3 5 3-1.5-7.5"/></svg>'
+    : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h9l5 5v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M15 3v5h5"/></svg>';
+
+  document.getElementById('resultScore').textContent  = g.correct + '/' + g.total;
+  document.getElementById('resultName').textContent   = g.name;
+  document.getElementById('resultVerdict').textContent = g.timedOut
+    ? 'TIME IS UP, ASSESSMENT ENDED'
+    : g.pass ? 'PASSED, ALL ' + g.total + ' QUESTIONS CORRECT'
+             : 'NOT PASSED, ALL ' + g.total + ' MUST BE CORRECT';
+
+  document.getElementById('statCorrect').textContent = g.correct;
+  document.getElementById('statWrong').textContent   = g.total - g.correct;
+  document.getElementById('statPct').textContent     = g.pct + '%';
+
+  document.getElementById('certBtnWrap').style.display = g.pass ? 'block' : 'none';
+
+  var moreLeft = read(STORE).filter(function(x){
+    return (x.name || '').toLowerCase() === (g.name || '').toLowerCase();
+  }).length < ATTEMPTS;
+  document.getElementById('retakeWrap').style.display = (!g.pass && moreLeft) ? 'block' : 'none';
+}
+
+function setSendPill(state, text) {
+  var p = document.getElementById('sendPill');
+  p.className = 'send-pill ' + state;
+  p.textContent = text;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   SENDING TO THE SERVER
+   The score and every response go in one POST. A failure does not lose the
+   attempt: it stays in the outbox and goes out on the next connection.
+   ══════════════════════════════════════════════════════════════════════ */
+function postGrade(grade) {
+  return fetch(GAS_URL, {
+    method  : 'POST',
+    headers : { 'Content-Type': 'text/plain;charset=utf-8' },
+    body    : JSON.stringify({ action: 'saveAssessmentGrade', data: grade })
+  }).then(function(r){ return r.json(); });
+}
+
+function markSynced(attemptId) {
+  var grades = read(STORE);
+  for (var i = 0; i < grades.length; i++) {
+    if (grades[i].attemptId === attemptId) { grades[i].synced = true; break; }
+  }
+  save(STORE, grades);
+}
+
+function queue(grade) {
+  var out = read(OUTBOX);
+  for (var i = 0; i < out.length; i++) if (out[i].attemptId === grade.attemptId) return;
+  out.push(grade);
+  save(OUTBOX, out);
+  paintQueue();
+}
+
+function paintQueue() {
+  var strip = document.getElementById('queueStrip');
+  var n = read(OUTBOX).length;
+  if (!n) { strip.classList.remove('show'); return; }
+  strip.textContent = n + (n === 1 ? ' result is' : ' results are') +
+    ' waiting to be sent. They will go out automatically when there is a connection.';
+  strip.classList.add('show');
+}
+
+function sendGrade(grade) {
+  if (!GAS_URL) { setSendPill('pend', 'Saved on this device'); return; }
+  setSendPill('pend', 'Sending');
+  if (!navigator.onLine) { queue(grade); setSendPill('pend', 'Waiting for a connection'); return; }
+
+  postGrade(grade).then(function(res){
+    if (res && res.ok) { markSynced(grade.attemptId); setSendPill('ok', 'Sent to NMCP'); }
+    else { queue(grade); setSendPill('pend', 'Waiting to be sent'); }
+  }).catch(function(){
+    queue(grade); setSendPill('pend', 'Waiting for a connection');
+  });
+}
+
+function flushOutbox() {
+  if (!GAS_URL || !navigator.onLine) return;
+  var out = read(OUTBOX);
+  if (!out.length) return;
+
+  var next = out[0];
+  postGrade(next).then(function(res){
+    if (res && res.ok) {
+      markSynced(next.attemptId);
+      var rest = read(OUTBOX).filter(function(g){ return g.attemptId !== next.attemptId; });
+      save(OUTBOX, rest);
+      paintQueue();
+      if (adminLoggedIn) renderGrades();
+      if (rest.length) flushOutbox();
+    }
+  }).catch(function(){});
+}
+
+window.addEventListener('online', flushOutbox);
+setInterval(flushOutbox, 60000);
+setTimeout(flushOutbox, 1500);
+paintQueue();
+
+/* ══════════════════════════════════════════════════════════════════════
+   CERTIFICATE
+   ══════════════════════════════════════════════════════════════════════ */
+function openCert() {
+  if (!lastGrade) return;
+  document.getElementById('certName').textContent  = lastGrade.name;
+  document.getElementById('certRole').textContent  = lastGrade.role + ', ' + lastGrade.org;
+  document.getElementById('certScore').textContent = 'Score: ' + lastGrade.correct + ' / ' + lastGrade.total + ' (' + lastGrade.pct + '%)';
+  var d = new Date(lastGrade.timestamp);
+  document.getElementById('certMeta').textContent =
+    'Issued ' + d.toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' }) +
+    '  ·  Certificate No. ' + lastGrade.attemptId;
+  document.getElementById('certModal').classList.add('show');
+}
+function closeCert() { document.getElementById('certModal').classList.remove('show'); }
+
+/* ══════════════════════════════════════════════════════════════════════
+   GRADES
+   ══════════════════════════════════════════════════════════════════════ */
+function adminLogin() {
+  if (document.getElementById('adminPwd').value === ADMIN_PASSWORD) {
+    adminLoggedIn = true;
+    document.getElementById('adminLoginWrap').style.display  = 'none';
+    document.getElementById('gradesDashboard').style.display = 'block';
+    document.getElementById('adminPwd').value = '';
+    document.getElementById('adminErr').style.display = 'none';
+    renderGrades();
+  } else {
+    document.getElementById('adminErr').style.display = 'block';
+  }
+}
+
+function renderGrades() {
+  var grades = read(STORE).sort(function(a,b){ return b.timestamp - a.timestamp; });
+  var total  = grades.length;
+  var passed = grades.filter(function(g){ return g.pass; }).length;
+  var avg    = total ? Math.round(grades.reduce(function(s,g){ return s + g.pct; }, 0) / total) : 0;
+
+  document.getElementById('gradesKPI').innerHTML =
+    '<div class="kpi-box"><div class="kpi-val" style="color:var(--navy)">' + total + '</div><div class="kpi-lbl">Attempts</div></div>' +
+    '<div class="kpi-box"><div class="kpi-val" style="color:var(--green)">' + passed + '</div><div class="kpi-lbl">Passed</div></div>' +
+    '<div class="kpi-box"><div class="kpi-val" style="color:var(--red)">' + (total - passed) + '</div><div class="kpi-lbl">Not Passed</div></div>' +
+    '<div class="kpi-box"><div class="kpi-val" style="color:var(--navy)">' + avg + '%</div><div class="kpi-lbl">Avg Score</div></div>';
+
+  var body = document.getElementById('gradeBody');
+  if (!total) {
+    body.innerHTML = '<tr><td colspan="11" style="text-align:center;padding:30px;color:#aaa;">No submissions yet</td></tr>';
+    return;
+  }
+  body.innerHTML = grades.map(function(g, i){
+    return '<tr>' +
+      '<td style="color:#aaa;font-size:.75rem;">' + (total - i) + '</td>' +
+      '<td style="font-weight:600;">' + esc(g.name) + '</td>' +
+      '<td style="color:#607080;">' + esc(g.org || '') + '</td>' +
+      '<td style="color:#607080;">' + esc(g.role) + '</td>' +
+      '<td style="font-weight:700;color:' + (g.pass ? 'var(--green)' : g.pct >= 50 ? 'var(--navy)' : 'var(--red)') + ';">' + g.pct + '%</td>' +
+      '<td>' + g.correct + '/' + g.total + '</td>' +
+      '<td style="color:#607080;">' + esc(g.weakest || '') + '</td>' +
+      '<td>' + esc(g.timeUsed || '') + '</td>' +
+      '<td><span class="badge ' + (g.timedOut ? 'timeout' : g.pass ? 'pass' : 'fail') + '">' +
+        (g.timedOut ? 'TIMEOUT' : g.pass ? 'PASS' : 'FAIL') + '</span></td>' +
+      '<td style="font-size:.78rem;color:#607080;">' + esc(g.datetime) + '</td>' +
+      '<td><span class="sync-pill ' + (g.synced ? 'ok' : 'pend') + '">' + (g.synced ? 'Synced' : 'Pending') + '</span></td>' +
+      '</tr>';
+  }).join('');
+}
+
+function syncAllPending() {
+  if (!GAS_URL) { alert('No server address is set yet. Results are held on this device. Use EXPORT CSV, or paste the endpoint into GAS_URL.'); return; }
+  var pending = read(STORE).filter(function(g){ return !g.synced; });
+  if (!pending.length) { alert('All results are already synced.'); return; }
+
+  var done = 0, failed = 0;
+  var run = function(i) {
+    if (i >= pending.length) {
+      renderGrades();
+      alert('Synced ' + done + ' of ' + pending.length + ' results.' + (failed ? ' ' + failed + ' could not be sent.' : ''));
+      return;
+    }
+    postGrade(pending[i]).then(function(res){
+      if (res && res.ok) { markSynced(pending[i].attemptId); done++; } else { failed++; }
+      run(i + 1);
+    }).catch(function(){ failed++; run(i + 1); });
+  };
+  run(0);
+}
+
+function clearGrades() {
+  if (!confirm('Clear every result held on this device? Anything not yet synced will be lost.')) return;
+  try { localStorage.removeItem(STORE); localStorage.removeItem(OUTBOX); } catch(e) {}
+  paintQueue();
+  renderGrades();
+}
+
+function exportCSV() {
+  var grades = read(STORE);
+  if (!grades.length) { alert('No data to export.'); return; }
+
+  var rows = [['Attempt ID','Assessment','Name','Organisation','Role','Score %','Correct','Total',
+               'Result','Timed Out','Time Used','Weakest Module','Date/Time','Synced',
+               'Question No','Module','Module Title','Question Type','Question',
+               'Answer Given','Correct Answer','Correct?']];
+
+  grades.forEach(function(g){
+    var base = [g.attemptId, g.assessment || ASSESSMENT, g.name, g.org || '', g.role,
+                g.pct, g.correct, g.total, g.timedOut ? 'TIMED OUT' : (g.pass ? 'PASS' : 'FAIL'),
+                g.timedOut ? 'Yes' : 'No', g.timeUsed || '', g.weakest || '', g.datetime, g.synced ? 'Yes' : 'No'];
+    var list = g.responses || [];
+    if (!list.length) { rows.push(base.concat(['','','','','','','',''])); return; }
+    list.forEach(function(r){
+      rows.push(base.concat([r.n, r.module || '', r.moduleTitle || '', r.qType || '',
+                             r.question, r.givenText, r.correctText, r.ok ? 'Yes' : 'No']));
+    });
+  });
+
+  var csv = rows.map(function(r){
+    return r.map(function(v){ return '"' + String(v).replace(/"/g,'""') + '"'; }).join(',');
+  }).join('\n');
+
+  var a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,\uFEFF' + encodeURIComponent(csv);
+  a.download = 'phu_case_scenarios_results_' + new Date().toISOString().split('T')[0] + '.csv';
+  a.click();
+}
+</script>
+</body>
+</html>
